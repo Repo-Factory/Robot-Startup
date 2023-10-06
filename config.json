@@ -1,0 +1,9 @@
+{
+    "robot" : "junebug",
+    "nodes" : [
+        "controller_node",
+        "gui_listener",
+        "pid_node",
+        "unified_can_driver"
+    ]
+}
