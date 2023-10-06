@@ -3,6 +3,8 @@
 #include "components.hpp"
 #include "rclcpp/rclcpp.hpp"
 
+#define CONFIG_PATH "/usr/local/config/robot.json"
+
 std::shared_ptr<Robot> initRobot(const Configuration& configuration)
 {
     std::shared_ptr<Robot> robot = RobotFactory::createRobot(configuration);

@@ -1,21 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "components.hpp"
-#include "gui_listener_node.hpp"
-#include "controller_node.hpp"
-#include "unified_can_driver.hpp"
-#include "pid_node.hpp"
 
 namespace
 {
     #define NODES_MAP_KEY "nodes"
+    #define NULL_TERMINATOR '\0'
 }
 
 namespace
 {
-    void createComponent(const std::string& component_name, const std::vector<pid_t>& childProcesses)
+    void createComponent(const std::string& component_name, std::vector<pid_t>& childProcesses)
     {
-        Process::createChildProgram(childProcesses, component_name, NULL);        
+        Process::createChildProgram(childProcesses, const_cast<char*>(component_name.c_str()), NULL);        
     }
 
     void launchNodesFromConfig(const std::vector<std::string>& nodes_to_enable, std::vector<pid_t>& childProcesses)
@@ -31,7 +28,7 @@ namespace
     }
 }
 
-void Components::InitChildren(const Robot& robot, const std::vector<pid_t>& childProcesses)
+void Components::InitChildren(const Robot& robot, std::vector<pid_t>& childProcesses)
 {
     launchNodesFromConfig(getNodesToEnable(robot), childProcesses);
 }
