@@ -15,7 +15,7 @@ find_library(PROCESSES processes)
 file(GLOB SOURCES src/*.cpp)
 include_directories(include)
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
 add_executable(${PROJECT_NAME}_exec 
     main/main.cpp

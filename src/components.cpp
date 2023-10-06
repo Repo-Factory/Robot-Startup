@@ -15,16 +15,16 @@ namespace
         return robot.getConfiguration().getJsonString()[NODES_MAP_KEY];
     }
 
+    void createComponent(const std::string& component_name, std::vector<pid_t>& childProcesses)
+    {
+        Process::createChildProgram(childProcesses, const_cast<char*>(component_name.c_str()), NULL);        
+    }
+
     void launchNodesFromConfig(const std::vector<std::string>& nodes_to_enable, std::vector<pid_t>& childProcesses)
     {
         for (const std::string& component_name : nodes_to_enable) {
             createComponent(component_name, childProcesses);
         }
-    }
-
-    void createComponent(const std::string& component_name, std::vector<pid_t>& childProcesses)
-    {
-        Process::createChildProgram(childProcesses, const_cast<char*>(component_name.c_str()), NULL);        
     }
 }
 
