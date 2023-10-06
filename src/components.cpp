@@ -10,9 +10,9 @@ namespace
 
 namespace
 {
-    void createComponent(const std::string& component_name, std::vector<pid_t>& childProcesses)
+    const std::vector<std::string> getNodesToEnable(const Robot& robot)
     {
-        Process::createChildProgram(childProcesses, const_cast<char*>(component_name.c_str()), NULL);        
+        return robot.getConfiguration().getJsonString()[NODES_MAP_KEY];
     }
 
     void launchNodesFromConfig(const std::vector<std::string>& nodes_to_enable, std::vector<pid_t>& childProcesses)
@@ -22,12 +22,13 @@ namespace
         }
     }
 
-    const std::vector<std::string> getNodesToEnable(const Robot& robot)
+    void createComponent(const std::string& component_name, std::vector<pid_t>& childProcesses)
     {
-        return robot.getConfiguration().getJsonString()[NODES_MAP_KEY];
+        Process::createChildProgram(childProcesses, const_cast<char*>(component_name.c_str()), NULL);        
     }
 }
 
+// Public Method to start children processes
 void Components::InitChildren(const Robot& robot, std::vector<pid_t>& childProcesses)
 {
     launchNodesFromConfig(getNodesToEnable(robot), childProcesses);

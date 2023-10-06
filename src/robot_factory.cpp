@@ -1,3 +1,11 @@
+/* 
+ * @brief Instantiate Object based on JSON config file
+ *
+ * Basically maps strings to Constructors
+ * If "junebug" read in config, we will instantiate Junebug object
+ * This object will contain relevant data about the robot to pass along to nodes
+ */
+
 #include "robot_factory.hpp"
 #include "percy.hpp"
 #include "junebug.hpp"
